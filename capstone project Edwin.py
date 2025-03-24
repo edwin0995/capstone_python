@@ -189,80 +189,114 @@ def tampilkan_data():
 
 # Fungsi untuk menambahkan siswa baru
 def tambah_siswa():
-    nis = input("Masukkan NIS: ")
-    if cari_siswa(nis):
-        print("Data sudah ada.")
-        return
-    nama = input("Masukkan Nama: ")
-    kelas = input("Masukkan Kelas: ")
-    jurusan = input("Masukkan Jurusan: ")
-    jenis_kelamin = input("Masukkan Jenis Kelamin (Laki-laki/Perempuan) :  ")
-    nilai_rata_rata = int(input("Masukkan Nilai Rata-rata: "))
+    while True:
+        print("\nMenu Tambah Siswa:")
+        print("1. Tambah Data Siswa")
+        print("2. Kembali ke Menu Utama")
+        pilihan = input("Pilih menu: ")
 
-    confirm = input("Lanjut menambahkan? (yes/no): ").lower()
-    if confirm == "yes":
-        students.append({"NIS": nis, "Nama": nama, "Kelas": kelas, "Jurusan": jurusan, "Jenis Kelamin": jenis_kelamin, "Nilai Rata-rata": nilai_rata_rata})
-        print("Data sudah disaved.")
-    else:
-        print("Penambahan dibatalkan.")
+        if pilihan == "1":
+            nis = input("Masukkan NIS: ")
+            #cek apakah NIS sudah ada
+            if cari_siswa(nis):
+                print("Data sudah ada.")
+                continue #langsung kembali ke menu tambah siswa
+            print("\nMasukkan data siswa: ")
+            nama = input("Masukkan Nama: ")
+            kelas = input("Masukkan Kelas: ")
+            jurusan = input("Masukkan Jurusan: ")
+            jenis_kelamin = input("Masukkan Jenis Kelamin (Laki-laki/Perempuan) :  ")
+            nilai_rata_rata = int(input("Masukkan Nilai Rata-rata: "))
+
+            confirm = input("Lanjut menambahkan? (yes/no): ").lower()
+            if confirm == "yes":
+                students.append({"NIS": nis, "Nama": nama, "Kelas": kelas, "Jurusan": jurusan, "Jenis Kelamin": jenis_kelamin, "Nilai Rata-rata": nilai_rata_rata})
+                print("Data sudah disaved.")
+            else:
+                print("Penambahan dibatalkan.")
     
-
-
+        elif pilihan == "2":
+            return #kembali ke menu utama
+        else:
+            print("Pilihan tidak valid")
 
 # Fungsi untuk mengupdate data siswa
 def update_siswa():
-    nis = input("Masukkan NIS siswa yang ingin diupdate: ")
-    data_siswa = cari_siswa(nis)
-    if not data_siswa:
-        print("Data siswa tidak ada")
-        return
-    else:
-        print("\nData Siswa Ditemukan:")
-        tampilkan_data_tabel([data_siswa])
+    while True:
+        print("\nMenu Update Siswa:")
+        print("1. Update Data Siswa")
+        print("2. Kembali ke Menu Utama")
+        pilihan = input("Pilih menu: ")
+
+        if pilihan == "1":
+            nis = input("Masukkan NIS siswa yang ingin diupdate: ")
+            data_siswa = cari_siswa(nis)
+            if not data_siswa:
+                print("Data siswa tidak ada")
+                continue
+            else:
+                print("\nData Siswa Ditemukan:")
+                tampilkan_data_tabel([data_siswa])
 
     # Tanyakan apakah ingin melanjutkan pembaruan (dipindahkan ke sini)
-    update = input("Apakah Anda ingin melanjutkan pembaruan? (yes/no): ").lower()
-    if update != "yes":
-        print("Pembaruan dibatalkan.")
-        return
+            update = input("Apakah Anda ingin melanjutkan pembaruan? (yes/no): ").lower()
+            if update != "yes":
+                print("Pembaruan dibatalkan.")
+                return
 
     # Jika pengguna memilih "yes", lanjutkan dengan pembaruan
-    kolom = input("Masukkan kolom yang ingin diupdate (Nama, Kelas, Jurusan, Jenis Kelamin, Nilai Rata-rata): ").capitalize()
-    if kolom not in data_siswa:
-        print("Kolom tidak valid.")
-        return
-    nilai_baru = input(f"Masukkan {kolom} baru: ")
-    if kolom == "Nilai Rata-rata":
-        nilai_baru = int(nilai_baru)
+            kolom = input("Masukkan kolom yang ingin diupdate (Nama, Kelas, Jurusan, Jenis Kelamin, Nilai Rata-rata): ").capitalize()
+            if kolom not in data_siswa:
+                print("Kolom tidak valid.")
+                return
+            nilai_baru = input(f"Masukkan {kolom} baru: ")
+            if kolom == "Nilai Rata-rata":
+                nilai_baru = int(nilai_baru)
 
     # Tanyakan konfirmasi sebelum melakukan pembaruan
-    confirm = input("Apa Anda ingin mengudapte data? (yes/no): ").lower()
-    if confirm == "yes":
-        data_siswa[kolom] = nilai_baru
-        print("Data sudah diupdate.")
-    else:
-        print("Pembaruan dibatalkan.")
+            confirm = input("Apa Anda ingin mengudapte data? (yes/no): ").lower()
+            if confirm == "yes":
+                data_siswa[kolom] = nilai_baru
+                print("Data sudah diupdate.")
+            else:
+                print("Pembaruan dibatalkan.")
+
+        elif pilihan == "2":
+            return #kembali ke menu utama
+        else:
+            print("Pilihan tidak valid")
 
 # Fungsi untuk menghapus data siswa
 def hapus_siswa():
-    nis = input("Masukkan NIS siswa yang ingin dihapus: ")
-    siswa = cari_siswa(nis)
-    if not siswa:
-        print("Data siswa tidak ada.")
-        return
+    while True:
+        print("\nMenu Hapus Siswa:")
+        print("1. Hapus Data Siswa")
+        print("2. Kembali ke Menu Utama")
+        pilihan = input("Pilih menu: ")
+
+        if pilihan == "1":
+            nis = input("Masukkan NIS siswa yang ingin dihapus: ")
+            siswa = cari_siswa(nis)
+            if not siswa:
+                print("Data siswa tidak ada.")
+                continue
 
     # Tampilkan data siswa yang akan dihapus
-    print("\nData Siswa yang Akan Dihapus:")
-    tampilkan_data_tabel([siswa])
+            print("\nData Siswa yang Akan Dihapus:")
+            tampilkan_data_tabel([siswa])
 
     # Tanyakan konfirmasi penghapusan
-    confirm_delete = input("Apakah Anda yakin ingin menghapus data ini? (yes/no): ").lower()
-    if confirm_delete == "yes":
-        students.remove(siswa)
-        print("Data sukses dihapus.")
-    else:
-        print("Penghapusan data dibatalkan.")
+            confirm_delete = input("Apakah Anda yakin ingin menghapus data ini? (yes/no): ").lower()
+            if confirm_delete == "yes":
+                students.remove(siswa)
+                print("Data sukses dihapus.")
+            else:
+                print("Penghapusan data dibatalkan.")
 
+        elif pilihan == "2":
+            return #kembali ke menu utama
+        else:
+            print("Pilihan tidak valid")
 
 # Menu utama
 def menu_utama():
