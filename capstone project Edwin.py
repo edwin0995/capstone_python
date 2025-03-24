@@ -112,8 +112,7 @@ def tampilkan_data():
             siswa_lulus = list(filter(lambda x: x["Nilai Rata-rata"] >= 75, students))
             if siswa_lulus:
                 print("\nDaftar Siswa yang Lulus:")
-                table_siswa_lulus = tabulate([siswa_lulus], headers="keys", tablefmt="grid")
-                print(table)
+                tampilkan_data_tabel(siswa_lulus)
             else:
                 print("Tidak ada siswa yang lulus.")
 
